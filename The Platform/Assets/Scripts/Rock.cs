@@ -65,8 +65,7 @@ public class Rock : MonoBehaviour {
     }
 
     public void StartDestroyTimer() {
-        ParticleSystem.MainModule main = _crashFX.main;
-        Destroy(this.gameObject, main.duration * 5f);
+        Destroy(this.gameObject, 2f);
     }
 
 }

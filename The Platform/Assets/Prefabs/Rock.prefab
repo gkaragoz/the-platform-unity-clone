@@ -301,6 +301,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e3c89da07bf7e4994343dc9c2e0565, type: 3}
 --- !u!4 &527703821 stripped
