@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour {
     private CharacterStats _characterStats;
 
     public bool IsMoving { get { return _characterMotor.IsMoving; } }
+    public bool IsJumping { get { return _characterMotor.GetIsJumping(); } }
     public float CurrentHealth { get { return _characterStats.GetCurrentHealth(); } }
     public float MaxHealth { get { return _characterStats.GetMaxHealth(); } }
 
@@ -25,6 +26,10 @@ public class CharacterController : MonoBehaviour {
 
     public void MoveToInput(Vector2 input) {
         _characterMotor.MoveToInput(input);
+    }
+
+    public void Jump() {
+        _characterMotor.Jump();
     }
 
     public void Crouch() {

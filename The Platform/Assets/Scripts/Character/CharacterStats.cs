@@ -82,6 +82,10 @@ public class CharacterStats : MonoBehaviour {
         return _character.MovementSpeed;
     }
 
+    public float GetJumpPower() {
+        return _character.JumpPower;
+    }
+
     public int GetLevel() {
         return _character.Level;
     }

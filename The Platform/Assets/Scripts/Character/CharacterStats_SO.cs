@@ -21,6 +21,10 @@ public class CharacterStats_SO : ScriptableObject {
     [SerializeField]
     private float _movementSpeed = 5f;
 
+    // Jump
+    [SerializeField]
+    private float _jumpPower = 100f;
+
     // Levelling
     [SerializeField]
     private int _level = 0;
@@ -52,6 +56,11 @@ public class CharacterStats_SO : ScriptableObject {
     public float MovementSpeed {
         get { return _movementSpeed; }
         set { _movementSpeed = value; }
+    }
+
+    public float JumpPower {
+        get { return _jumpPower; }
+        set { _jumpPower = value; }
     }
 
     public int Level {

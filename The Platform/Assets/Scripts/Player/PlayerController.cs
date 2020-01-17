@@ -5,7 +5,10 @@ public class PlayerController : MonoBehaviour {
 
     public Vector2 CurrentInput { get; set; }
 
-    public bool IsDucking { get; set; }
+    public bool IsCrouching {
+        get { return _isCrouching; }
+        set { _isCrouching = value; }
+    }
 
     public bool HasInput { get { return (CurrentInput != Vector2.zero) ? true : false; } }
 
@@ -17,6 +20,12 @@ public class PlayerController : MonoBehaviour {
     private float _xInput;
     [SerializeField]
     [Utils.ReadOnly]
+    private bool _isJumping;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private bool _isCrouching;
+    [SerializeField]
+    [Utils.ReadOnly]
     private CharacterController _characterController;
 
     private void Awake() {
@@ -24,35 +33,51 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        _isJumping = IsJumping();
+
         _xInput = Input.GetAxis("Horizontal");
 
         CurrentInput = new Vector2(_xInput, 0f);
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-            if (!IsDucking) {
+            if (!IsCrouching) {
                 Crouch();
             }
         }
 
         if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) {
-            if (IsDucking) {
+            if (IsCrouching) {
                 StandUp();
             }
         }
 
-        if (HasInput) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
+            if (!IsJumping()) {
+                Jump();
+            }
+        }
+
+        if (HasInput && !IsCrouching) {
             MoveToCurrentInput();
         }
     }
 
+    public void Jump() {
+        _characterController.Jump();
+    }
+
     public void Crouch() {
-        IsDucking = true;
+        IsCrouching = true;
         _characterController.Crouch();
     }
 
     public void StandUp() {
-        IsDucking = false;
+        IsCrouching = false;
         _characterController.StandUp();
+    }
+
+    public bool IsJumping() {
+        return _characterController.IsJumping;
     }
 
     public void MoveToCurrentInput() {

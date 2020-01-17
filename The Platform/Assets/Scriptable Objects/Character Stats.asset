@@ -17,6 +17,7 @@ MonoBehaviour:
   _currentHealth: 100
   _maxHealth: 100
   _movementSpeed: 5
+  _jumpPower: 600
   _level: 0
   _maxExperience: 100
   _currentExperience: 0
