@@ -10,15 +10,18 @@ public class Rock : MonoBehaviour {
     [SerializeField]
     private TrailRenderer _trailRenderer;
     [SerializeField]
+    private ParticleSystem _crashFX;
+    [SerializeField]
     private Rigidbody _rb;
     [SerializeField]
     private float _fallingSpeed = 1f;
 
     private Color _generatedRandomColor;
 
-    private void Awake() {
+    private void Start() {
         SetRandomColor();
         SetTrailRendererColor();
+        SetCrashParticleColor();
     }
 
     private void Update() {
@@ -26,6 +29,11 @@ public class Rock : MonoBehaviour {
             _rb.position = new Vector3(_rb.position.x, transform.localScale.y * 0.5f, _rb.position.z);
             _rb.velocity = Vector3.zero;
             _rb.isKinematic = true;
+
+            _renderer.enabled = false;
+            _crashFX.Play();
+
+            StartDestroyTimer();
         }
     }
 
@@ -47,8 +55,18 @@ public class Rock : MonoBehaviour {
         _trailRenderer.colorGradient = gradient;
     }
 
+    public void SetCrashParticleColor() {
+        ParticleSystem.MainModule main = _crashFX.main;
+        main.startColor = _generatedRandomColor;
+    }
+
     public void Fall() {
         _rb.velocity = Vector3.down * _fallingSpeed;
+    }
+
+    public void StartDestroyTimer() {
+        ParticleSystem.MainModule main = _crashFX.main;
+        Destroy(this.gameObject, main.duration * 5f);
     }
 
 }
