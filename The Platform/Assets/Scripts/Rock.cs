@@ -9,12 +9,24 @@ public class Rock : MonoBehaviour {
     private Renderer _renderer;
     [SerializeField]
     private TrailRenderer _trailRenderer;
+    [SerializeField]
+    private Rigidbody _rb;
+    [SerializeField]
+    private float _fallingSpeed = 1f;
 
     private Color _generatedRandomColor;
 
     private void Awake() {
         SetRandomColor();
         SetTrailRendererColor();
+    }
+
+    private void Update() {
+        if (_rb.position.y < 0) {
+            _rb.position = new Vector3(_rb.position.x, transform.localScale.y * 0.5f, _rb.position.z);
+            _rb.velocity = Vector3.zero;
+            _rb.isKinematic = true;
+        }
     }
 
     public void SetRandomColor() {
@@ -33,6 +45,10 @@ public class Rock : MonoBehaviour {
         );
 
         _trailRenderer.colorGradient = gradient;
+    }
+
+    public void Fall() {
+        _rb.velocity = Vector3.down * _fallingSpeed;
     }
 
 }
