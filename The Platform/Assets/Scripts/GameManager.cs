@@ -14,4 +14,15 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
+    [SerializeField]
+    private Transform _leftMapPivotTransform;
+    [SerializeField]
+    private Transform _rightMapPivotTransform;
+    [SerializeField]
+    private Transform _rockFallPivotTransform;
+
+    public Transform LeftMapPivotTransform { get { return _leftMapPivotTransform; } }
+    public Transform RightMapPivotTransform { get { return _rightMapPivotTransform; } }
+    public Transform RockFallPivotTransform { get { return _rockFallPivotTransform; } }
+
 }
