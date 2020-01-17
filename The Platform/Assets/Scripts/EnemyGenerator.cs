@@ -28,8 +28,7 @@ public class EnemyGenerator : MonoBehaviour {
             GameManager.instance.RockFallPivotTransform.position.y, 
             Random.Range(GameManager.instance.LeftMapPivotTransform.position.z, GameManager.instance.RightMapPivotTransform.position.z));
         Quaternion randomQuaternion = Quaternion.Euler(0f, Random.Range(0, 180), 0f);
-        GameObject go = Instantiate(_rockPrefab, randomPosition, randomQuaternion);
-        go.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        Instantiate(_rockPrefab, randomPosition, randomQuaternion);
     }
 
     public void StartGenerate() {

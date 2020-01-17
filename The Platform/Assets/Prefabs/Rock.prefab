@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8458566499976796428}
   - component: {fileID: 833768855896256358}
   - component: {fileID: 488298951}
+  - component: {fileID: 9162928195472471617}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -215,3 +216,17 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &9162928195472471617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458566499976796429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee130bfbc3968248acf03705bdc2abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 8458566499976796419}
+  _trailRenderer: {fileID: 488298951}

@@ -516,7 +516,7 @@ MonoBehaviour:
   _rockPrefab: {fileID: 8458566499976796429, guid: 2f5fd0870ca6c0242837c016897d7a6f,
     type: 3}
   _spawnRate: 1
-  _isRunning: 0
+  _isRunning: 1
 --- !u!1001 &2499868439801281879
 PrefabInstance:
   m_ObjectHideFlags: 0
