@@ -25,4 +25,8 @@ public class GameManager : MonoBehaviour {
     public Transform RightMapPivotTransform { get { return _rightMapPivotTransform; } }
     public Transform RockFallPivotTransform { get { return _rockFallPivotTransform; } }
 
+    private void Start() {
+        ObjectPooler.instance.InitializePool("Rock");
+    }
+
 }

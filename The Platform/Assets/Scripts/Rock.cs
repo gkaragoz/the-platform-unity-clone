@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour {
+public class Rock : MonoBehaviour, IPooledObject {
 
     [Header("Initializations")]
     [SerializeField]
@@ -33,7 +33,7 @@ public class Rock : MonoBehaviour {
             _renderer.enabled = false;
             _crashFX.Play();
 
-            StartDestroyTimer();
+            Invoke("StartHideTimer", 2f);
         }
     }
 
@@ -64,8 +64,19 @@ public class Rock : MonoBehaviour {
         _rb.velocity = Vector3.down * _fallingSpeed;
     }
 
-    public void StartDestroyTimer() {
-        Destroy(this.gameObject, 2f);
+    public void StartHideTimer() {
+        this.gameObject.SetActive(false);
+    }
+
+    public void OnObjectReused() {
+        SetRandomColor();
+        SetTrailRendererColor();
+        SetCrashParticleColor();
+
+        _renderer.enabled = true;
+        _rb.isKinematic = false;
+
+        Fall();
     }
 
 }

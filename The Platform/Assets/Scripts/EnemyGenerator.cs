@@ -4,8 +4,6 @@ public class EnemyGenerator : MonoBehaviour {
 
     [Header("Initializations")]
     [SerializeField]
-    private Rock _rockPrefab;
-    [SerializeField]
     private float _spawnRate = 0.5f; // Seconds
     [SerializeField]
     private bool _isRunning = false;
@@ -28,8 +26,7 @@ public class EnemyGenerator : MonoBehaviour {
             GameManager.instance.RockFallPivotTransform.position.y, 
             Random.Range(GameManager.instance.LeftMapPivotTransform.position.z, GameManager.instance.RightMapPivotTransform.position.z));
         Quaternion randomQuaternion = Quaternion.Euler(0f, Random.Range(0, 180), 0f);
-        Rock rock = (Rock) Instantiate(_rockPrefab, randomPosition, randomQuaternion);
-        rock.Fall();
+        ObjectPooler.instance.SpawnFromPool("Rock", randomPosition, randomQuaternion).GetComponent<Rock>();
     }
 
     public void StartGenerate() {
