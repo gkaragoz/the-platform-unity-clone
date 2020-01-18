@@ -1,22 +1,48 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour {
 
+    [System.Serializable]
+    public class Settings {
+        public float rockSpawnRate = 1f;
+        public float bladeSpawnRate = 5f;
+    }
+
     [Header("Initializations")]
     [SerializeField]
-    private float _spawnRate = 0.5f; // Seconds
-    [SerializeField]
-    private bool _isRunning = false;
+    private Settings _settings = null;
 
     public bool IsRunning { get { return _isRunning; } }
 
-    private float _nextSpawn;
+    [Header("Debug")]
+    [SerializeField]
+    [Utils.ReadOnly]
+    private bool _isRunning = false;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Coroutine _checkRocksCoroutine = null;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Coroutine _checkBladesCoroutine = null;
 
-    private void Update() {
-        if (IsRunning && Time.time > _nextSpawn) {
-            _nextSpawn = Time.time + _spawnRate;
+
+    public IEnumerator ICheckRocks() {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_settings.rockSpawnRate);
+
+        while (true) {
+            yield return waitForSeconds;
 
             SpawnRock();
+        }
+    }
+
+    public IEnumerator ICheckBlades() {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_settings.bladeSpawnRate);
+
+        while (true) {
+            yield return waitForSeconds;
+
             SpawnBlade();
         }
     }
@@ -55,10 +81,18 @@ public class EnemyGenerator : MonoBehaviour {
 
     public void StartGenerate() {
         _isRunning = true;
+
+        _checkRocksCoroutine = StartCoroutine(ICheckRocks());
+        _checkBladesCoroutine = StartCoroutine(ICheckBlades());
     }
 
     public void StopGenerate() {
         _isRunning = false;
+
+        StopAllCoroutines();
+
+        _checkRocksCoroutine = null;
+        _checkBladesCoroutine = null;
     }
 
 }

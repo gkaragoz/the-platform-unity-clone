@@ -438,6 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0428ea19e3aa1948b072076ffec6d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyGenerator: {fileID: 1522710638}
+  _generateOnAwake: 1
   _leftMapPivotTransform: {fileID: 1042016865}
   _rightMapPivotTransform: {fileID: 110703764}
   _rockFallPivotTransform: {fileID: 1153809647}
@@ -571,7 +573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58004e398739696429f70015c6f3f1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 1
+  _settings:
+    rockSpawnRate: 1
+    bladeSpawnRate: 5
   _isRunning: 1
 --- !u!1001 &2499868439801281879
 PrefabInstance:

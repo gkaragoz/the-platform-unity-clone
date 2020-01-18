@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
+    [Header("Initializations")]
+    [SerializeField]
+    private EnemyGenerator _enemyGenerator = null;
+    [SerializeField]
+    private bool _generateOnAwake = false;
+
     [SerializeField]
     private Transform _leftMapPivotTransform = null;
     [SerializeField]
@@ -31,6 +37,10 @@ public class GameManager : MonoBehaviour {
         ObjectPooler.instance.InitializePool("BladeBackward");
 
         InitializeBladeDestinations();
+
+        if (_generateOnAwake) {
+            _enemyGenerator.StartGenerate();
+        }
     }
 
     private void InitializeBladeDestinations() {
