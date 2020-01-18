@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public bool HasInput { get { return (CurrentInput != Vector2.zero) ? true : false; } }
 
     public CharacterManager CharacterController { get { return _characterController; } }
+    public PlayerStats PlayerStats { get { return _playerStats; } }
 
     [Header("Debug")]
     [SerializeField]

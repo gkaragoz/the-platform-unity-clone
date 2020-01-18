@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public Action<GameState> OnGameStateChanged;
+    public Action<PlayerStats> OnPlayerStatsChanged;
 
     [Header("Initializations")]
     [SerializeField]
@@ -147,6 +148,8 @@ public class GameManager : MonoBehaviour {
 
     public void AddScoreToPlayer(int value) {
         _playerController.AddScore(value);
+
+        OnPlayerStatsChanged?.Invoke(_playerController.PlayerStats);
     }
 
 }
