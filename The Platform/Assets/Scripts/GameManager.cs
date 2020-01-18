@@ -15,11 +15,11 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     [SerializeField]
-    private Transform _leftMapPivotTransform;
+    private Transform _leftMapPivotTransform = null;
     [SerializeField]
-    private Transform _rightMapPivotTransform;
+    private Transform _rightMapPivotTransform = null;
     [SerializeField]
-    private Transform _rockFallPivotTransform;
+    private Transform _rockFallPivotTransform = null;
 
     public Transform LeftMapPivotTransform { get { return _leftMapPivotTransform; } }
     public Transform RightMapPivotTransform { get { return _rightMapPivotTransform; } }
@@ -27,6 +27,19 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         ObjectPooler.instance.InitializePool("Rock");
+        ObjectPooler.instance.InitializePool("BladeForward");
+        ObjectPooler.instance.InitializePool("BladeBackward");
+
+        InitializeBladeDestinations();
+    }
+
+    private void InitializeBladeDestinations() {
+        foreach (GameObject bladeObject in ObjectPooler.instance.GetGameObjectsOnPool("BladeForward")) {
+            bladeObject.GetComponent<Blade>().SetDestinationTransform(_rightMapPivotTransform);
+        }
+        foreach (GameObject bladeObject in ObjectPooler.instance.GetGameObjectsOnPool("BladeBackward")) {
+            bladeObject.GetComponent<Blade>().SetDestinationTransform(_leftMapPivotTransform);
+        }
     }
 
 }

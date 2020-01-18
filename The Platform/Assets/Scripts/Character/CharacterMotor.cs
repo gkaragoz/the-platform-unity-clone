@@ -9,13 +9,13 @@ public class CharacterMotor : MonoBehaviour {
 
     [Header("Initializations")]
     [SerializeField]
-    private Transform _meshGraphicsTransform;
+    private Transform _meshGraphicsTransform = null;
     [SerializeField]
-    private Transform _colliderPivotTransform;
+    private Transform _colliderPivotTransform = null;
     [SerializeField]
-    private Transform _footRayPivotTransform;
+    private Transform _footRayPivotTransform = null;
     [SerializeField]
-    private float _crouchDownSpeedMultiplier;
+    private float _crouchDownSpeedMultiplier = 1f;
 
     public bool IsMoving { get { return _rb.velocity.magnitude > 0.01f ? true : false; } }
     public float VelocityMagnitude { get { return _rb.velocity.magnitude; } }

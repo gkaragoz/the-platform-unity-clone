@@ -6,13 +6,13 @@ public class Rock : MonoBehaviour, IPooledObject {
 
     [Header("Initializations")]
     [SerializeField]
-    private Renderer _renderer;
+    private Renderer _renderer = null;
     [SerializeField]
-    private TrailRenderer _trailRenderer;
+    private TrailRenderer _trailRenderer = null;
     [SerializeField]
-    private ParticleSystem _crashFX;
+    private ParticleSystem _crashFX = null;
     [SerializeField]
-    private Rigidbody _rb;
+    private Rigidbody _rb = null;
     [SerializeField]
     private float _fallingSpeed = 1f;
 
@@ -75,6 +75,8 @@ public class Rock : MonoBehaviour, IPooledObject {
 
         _renderer.enabled = true;
         _rb.isKinematic = false;
+
+        this.gameObject.SetActive(true);
 
         Fall();
     }

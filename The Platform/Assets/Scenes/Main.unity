@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.42135328, g: 0.71442026, b: 0.8809922, a: 1}
+  m_IndirectSpecularColor: {r: 0.42179182, g: 0.7152714, b: 0.8841921, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -519,6 +519,14 @@ MonoBehaviour:
     prefab: {fileID: 8458566499976796429, guid: 2f5fd0870ca6c0242837c016897d7a6f,
       type: 3}
     size: 25
+  - parentTransform: {fileID: 1158268067}
+    name: BladeForward
+    prefab: {fileID: 252805984246471440, guid: aebc5e6f9174b244fb2109aa122fe988, type: 3}
+    size: 2
+  - parentTransform: {fileID: 1158268067}
+    name: BladeBackward
+    prefab: {fileID: 252805984246471440, guid: aebc5e6f9174b244fb2109aa122fe988, type: 3}
+    size: 2
 --- !u!1 &1522710636
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58004e398739696429f70015c6f3f1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 1
+  _spawnRate: 5
   _isRunning: 1
 --- !u!1001 &2499868439801281879
 PrefabInstance:
