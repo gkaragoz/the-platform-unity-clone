@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings:
     rockSpawnRate: 1
-    bladeSpawnRate: 5
+    bladeSpawnRate: 6.5
   _isRunning: 1
 --- !u!1 &1599471668
 GameObject:
