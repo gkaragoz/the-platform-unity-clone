@@ -55,7 +55,7 @@ public class CharacterMotor : MonoBehaviour {
 
             return distance <= 0.001f ? false : true;
         }
-        return false;
+        return true;
     }
 
     private IEnumerator ISetCrouchDownVelocity() {
