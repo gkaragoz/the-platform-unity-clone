@@ -52,7 +52,6 @@ public class CharacterMotor : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(_footRayPivotTransform.position, Vector3.down, out hit, Mathf.Infinity)) {
             float distance = Vector3.Distance(_footRayPivotTransform.position, hit.point);
-
             return distance <= 0.001f ? false : true;
         }
         return true;
