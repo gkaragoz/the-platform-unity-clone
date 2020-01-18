@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LeanBlade : MonoBehaviour {
+public class LeanBlade : MonoBehaviour, IPooledObject {
 
     [System.Serializable]
     public class Settings {
@@ -14,11 +14,17 @@ public class LeanBlade : MonoBehaviour {
     [SerializeField]
     private float _time = 2f;
     [SerializeField]
-    private Transform _destinationTransform = null;
-    [SerializeField]
     private Settings _settings = null;
 
+    [Header("Debug")]
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Transform _destinationTransform = null;
+    [SerializeField]
+    [Utils.ReadOnly]
     private bool _isMoving = false;
+    [SerializeField]
+    [Utils.ReadOnly]
     private bool _hasPlayedDisappearAnimation = false;
 
     private void Update() {
@@ -61,4 +67,14 @@ public class LeanBlade : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
+    public void SetDestinationTransform(Transform destination) {
+        this._destinationTransform = destination;
+    }
+
+    public void OnObjectReused() {
+        _isMoving = false;
+        _hasPlayedDisappearAnimation = false;
+
+        this.gameObject.SetActive(true);
+    }
 }

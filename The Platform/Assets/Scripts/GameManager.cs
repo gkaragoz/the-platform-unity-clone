@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour {
 
     private void InitializeBladeDestinations() {
         foreach (GameObject bladeObject in ObjectPooler.instance.GetGameObjectsOnPool("BladeForward")) {
-            bladeObject.GetComponent<Blade>().SetDestinationTransform(_rightMapPivotTransform);
+            bladeObject.GetComponent<LeanBlade>().SetDestinationTransform(_rightMapPivotTransform);
         }
         foreach (GameObject bladeObject in ObjectPooler.instance.GetGameObjectsOnPool("BladeBackward")) {
-            bladeObject.GetComponent<Blade>().SetDestinationTransform(_leftMapPivotTransform);
+            bladeObject.GetComponent<LeanBlade>().SetDestinationTransform(_leftMapPivotTransform);
         }
     }
 
