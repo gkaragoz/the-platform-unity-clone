@@ -1,19 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LeanBlade : MonoBehaviour {
 
+    [System.Serializable]
+    public class Settings {
+        public float placementAnimationTime = 0.5f;
+        public float disappearAnimationTime = 0.5f;
+        public float placementPositionY = 0f;
+        public float disappearPositionY = -0.6f;
+    }
+
     [Header("Initializations")]
-    [SerializeField]
-    private Animator _animator = null;
     [SerializeField]
     private float _time = 2f;
     [SerializeField]
     private Transform _destinationTransform = null;
-
-    private const string PLACEMENT_ANIMATION_TRIGGER = "PLACEMENT_ANIMATION";
-    private const string DISAPPEAR_ANIMATION_TRIGGER = "DISAPPEAR_ANIMATION";
+    [SerializeField]
+    private Settings _settings = null;
 
     private bool _isMoving = false;
     private bool _hasPlayedDisappearAnimation = false;
@@ -40,11 +43,12 @@ public class LeanBlade : MonoBehaviour {
     }
 
     private void PlayPlacementAnimation() {
-        _animator.SetTrigger(PLACEMENT_ANIMATION_TRIGGER);
+        LeanTween.moveLocalY(this.gameObject, _settings.placementPositionY, _settings.placementAnimationTime).setEase(LeanTweenType.easeInOutQuad);
     }
 
     private void PlayDisappearAnimation() {
-        _animator.SetTrigger(DISAPPEAR_ANIMATION_TRIGGER);
+        LeanTween.moveLocalY(this.gameObject, _settings.disappearPositionY, _settings.disappearAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(SetActiveFalse);
+
         _hasPlayedDisappearAnimation = true;
     }
 
