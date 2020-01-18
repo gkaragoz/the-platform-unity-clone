@@ -311,7 +311,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -523,11 +523,11 @@ MonoBehaviour:
   - parentTransform: {fileID: 1158268067}
     name: BladeForward
     prefab: {fileID: 252805984246471440, guid: aebc5e6f9174b244fb2109aa122fe988, type: 3}
-    size: 25
+    size: 5
   - parentTransform: {fileID: 1158268067}
     name: BladeBackward
     prefab: {fileID: 252805984246471440, guid: aebc5e6f9174b244fb2109aa122fe988, type: 3}
-    size: 25
+    size: 5
 --- !u!1 &1522710636
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,9 +709,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1653792496, guid: 0ed19291260c7544b8a3e236a474e716, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 439517b90a89d4346a4686f1f6b4fd38, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed19291260c7544b8a3e236a474e716, type: 3}

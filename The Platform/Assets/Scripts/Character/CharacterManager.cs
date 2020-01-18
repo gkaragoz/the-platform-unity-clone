@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterMotor), typeof(CharacterStats))]
-public class CharacterController : MonoBehaviour {
+public class CharacterManager : MonoBehaviour {
 
-    public Action<CharacterController> onDead;
+    public Action<CharacterManager> onDead;
     public Action onTakeDamage;
 
     private CharacterMotor _characterMotor;

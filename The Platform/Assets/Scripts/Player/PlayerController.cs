@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterManager))]
 public class PlayerController : MonoBehaviour {
 
     public Vector2 CurrentInput { get; set; }
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool HasInput { get { return (CurrentInput != Vector2.zero) ? true : false; } }
 
-    public CharacterController CharacterController { get { return _characterController; } }
+    public CharacterManager CharacterController { get { return _characterController; } }
 
     [Header("Debug")]
     [SerializeField]
@@ -26,10 +26,10 @@ public class PlayerController : MonoBehaviour {
     private bool _isCrouching;
     [SerializeField]
     [Utils.ReadOnly]
-    private CharacterController _characterController;
+    private CharacterManager _characterController;
 
     private void Awake() {
-        _characterController = GetComponent<CharacterController>();
+        _characterController = GetComponent<CharacterManager>();
     }
 
     private void Update() {
