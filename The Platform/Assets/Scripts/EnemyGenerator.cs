@@ -37,7 +37,7 @@ public class EnemyGenerator : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(
                 0f,
-                0f,
+                -0.6f,
                 zPos);
 
             ObjectPooler.instance.SpawnFromPool("BladeForward", spawnPosition, Quaternion.identity);
@@ -46,7 +46,7 @@ public class EnemyGenerator : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(
                 0f,
-                0f,
+                -0.6f,
                 zPos);
 
             ObjectPooler.instance.SpawnFromPool("BladeBackward", spawnPosition, Quaternion.identity);

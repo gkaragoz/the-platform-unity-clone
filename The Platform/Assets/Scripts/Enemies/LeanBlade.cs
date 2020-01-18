@@ -20,47 +20,17 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
     [SerializeField]
     [Utils.ReadOnly]
     private Transform _destinationTransform = null;
-    [SerializeField]
-    [Utils.ReadOnly]
-    private bool _isMoving = false;
-    [SerializeField]
-    [Utils.ReadOnly]
-    private bool _hasPlayedDisappearAnimation = false;
-
-    private void Update() {
-        if (HasDestination() && !HasDestinationReached() && _isMoving == false) {
-            this.gameObject.SetActive(true);
-            _hasPlayedDisappearAnimation = false;
-
-            PlayPlacementAnimation();
-            MoveToDestination();
-        } else if (HasDestination() && HasDestinationReached() && _hasPlayedDisappearAnimation == false) {
-            PlayDisappearAnimation();
-            _isMoving = false;
-        }
-    }
-
-    private bool HasDestination() {
-        return _destinationTransform == null ? false : true;
-    }
-
-    private bool HasDestinationReached() {
-        return Mathf.Abs(transform.position.z - _destinationTransform.position.z) <= 0.001f ? true : false;
-    }
 
     private void PlayPlacementAnimation() {
-        LeanTween.moveLocalY(this.gameObject, _settings.placementPositionY, _settings.placementAnimationTime).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.moveLocalY(this.gameObject, _settings.placementPositionY, _settings.placementAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(MoveToDestination);
     }
 
     private void PlayDisappearAnimation() {
         LeanTween.moveLocalY(this.gameObject, _settings.disappearPositionY, _settings.disappearAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(SetActiveFalse);
-
-        _hasPlayedDisappearAnimation = true;
     }
 
     private void MoveToDestination() {
-        _isMoving = true;
-        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _time).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _time).setEase(LeanTweenType.easeInOutQuad).setOnComplete(PlayDisappearAnimation);
     }
 
     public void SetActiveFalse() {
@@ -72,9 +42,8 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
     }
 
     public void OnObjectReused() {
-        _isMoving = false;
-        _hasPlayedDisappearAnimation = false;
+        PlayPlacementAnimation();
 
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 }
