@@ -79,20 +79,49 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
-    public void StartGenerate() {
+    public void StartGenerateAll() {
         _isRunning = true;
 
-        _checkRocksCoroutine = StartCoroutine(ICheckRocks());
-        _checkBladesCoroutine = StartCoroutine(ICheckBlades());
+        StartRockSpawns();
+        StartBladeSpawns();
     }
 
-    public void StopGenerate() {
+    public void StopGenerateAll() {
         _isRunning = false;
 
         StopAllCoroutines();
+    }
 
-        _checkRocksCoroutine = null;
-        _checkBladesCoroutine = null;
+    public void StartRockSpawns() {
+        if (_checkRocksCoroutine == null) {
+            _checkRocksCoroutine = StartCoroutine(ICheckRocks());
+            _isRunning = true;
+        }
+    }
+
+    public void StopRockSpawns() {
+        StopCoroutine(_checkRocksCoroutine);
+        _isRunning = CheckAllCoroutineRunStatus();
+    }
+
+    public void StartBladeSpawns() {
+        if (_checkBladesCoroutine == null) {
+            _checkBladesCoroutine = StartCoroutine(ICheckBlades());
+            _isRunning = true;
+        }
+    }
+
+    public void StopBladeSpawn() {
+        StopCoroutine(_checkBladesCoroutine);
+        _isRunning = CheckAllCoroutineRunStatus();
+    }
+
+    private bool CheckAllCoroutineRunStatus() {
+        if (_checkRocksCoroutine == null && _checkBladesCoroutine == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

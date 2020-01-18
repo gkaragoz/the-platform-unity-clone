@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
         InitializeBladeDestinations();
 
         if (_generateOnAwake) {
-            _enemyGenerator.StartGenerate();
+            _enemyGenerator.StartGenerateAll();
         }
     }
 
