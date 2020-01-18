@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour {
     [Header("Initializations")]
     [SerializeField]
     private EnemyGenerator _enemyGenerator = null;
+    [SerializeField]
+    private PlayerController _playerController = null;
 
     [SerializeField]
     private Transform _leftMapPivotTransform = null;
@@ -141,6 +143,10 @@ public class GameManager : MonoBehaviour {
         OnClick_NewGame();
 
         GameStateEnum = GameState.RestartGame;
+    }
+
+    public void AddScoreToPlayer(int value) {
+        _playerController.AddScore(value);
     }
 
 }
