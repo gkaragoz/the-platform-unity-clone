@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class LeanBlade : MonoBehaviour, IPooledObject {
 
     [System.Serializable]
@@ -19,22 +20,25 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
+    private Enemy _enemy = null;
+    [SerializeField]
+    [Utils.ReadOnly]
     private Transform _destinationTransform = null;
+
+    private void Awake() {
+        _enemy = GetComponent<Enemy>();
+    }
 
     private void PlayPlacementAnimation() {
         LeanTween.moveLocalY(this.gameObject, _settings.placementPositionY, _settings.placementAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(MoveToDestination);
     }
 
     private void PlayDisappearAnimation() {
-        LeanTween.moveLocalY(this.gameObject, _settings.disappearPositionY, _settings.disappearAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(SetActiveFalse);
+        LeanTween.moveLocalY(this.gameObject, _settings.disappearPositionY, _settings.disappearAnimationTime).setEase(LeanTweenType.easeInOutQuad).setOnComplete(_enemy.OnCrashed);
     }
 
     private void MoveToDestination() {
         LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _time).setEase(LeanTweenType.easeInOutQuad).setOnComplete(PlayDisappearAnimation);
-    }
-
-    public void SetActiveFalse() {
-        this.gameObject.SetActive(false);
     }
 
     public void SetDestinationTransform(Transform destination) {
@@ -46,4 +50,5 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
 
         gameObject.SetActive(true);
     }
+
 }

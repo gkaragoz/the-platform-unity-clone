@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 2864463194508220785}
   - component: {fileID: 488298951}
   - component: {fileID: 9162928195472471617}
+  - component: {fileID: 8737769329656403374}
+  - component: {fileID: -8921493440452118547}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -234,6 +236,36 @@ MonoBehaviour:
   _crashFX: {fileID: 527703820}
   _rb: {fileID: 2864463194508220785}
   _fallingSpeed: 8
+  _enemy: {fileID: 0}
+  _generatedRandomColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &8737769329656403374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458566499976796429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca451311fbf30941bebdb854c89e30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyStats: {fileID: 0}
+--- !u!114 &-8921493440452118547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458566499976796429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2b99bdae5851f4db4cc6963ec4e973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDefinition_Template: {fileID: 11400000, guid: 33d46b2d7019efc44a49471fae1e706f,
+    type: 2}
+  _enemy: {fileID: 0}
 --- !u!1001 &4042970558744911376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +277,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrashFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4042970558490362141, guid: f9e3c89da07bf7e4994343dc9c2e0565,
         type: 3}
@@ -300,21 +347,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042970558490362140, guid: f9e3c89da07bf7e4994343dc9c2e0565,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e3c89da07bf7e4994343dc9c2e0565, type: 3}

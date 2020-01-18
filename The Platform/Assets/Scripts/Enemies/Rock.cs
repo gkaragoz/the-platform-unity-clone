@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class Rock : MonoBehaviour, IPooledObject {
 
     [Header("Initializations")]
@@ -16,7 +15,17 @@ public class Rock : MonoBehaviour, IPooledObject {
     [SerializeField]
     private float _fallingSpeed = 1f;
 
+    [Header("Debug")]
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Enemy _enemy = null;
+    [SerializeField]
+    [Utils.ReadOnly]
     private Color _generatedRandomColor;
+
+    private void Awake() {
+        _enemy = GetComponent<Enemy>();
+    }
 
     private void Start() {
         SetRandomColor();
@@ -33,7 +42,7 @@ public class Rock : MonoBehaviour, IPooledObject {
             _renderer.enabled = false;
             _crashFX.Play();
 
-            Invoke("StartHideTimer", 2f);
+            _enemy.OnCrashed();
         }
     }
 
@@ -62,10 +71,6 @@ public class Rock : MonoBehaviour, IPooledObject {
 
     public void Fall() {
         _rb.velocity = Vector3.down * _fallingSpeed;
-    }
-
-    public void StartHideTimer() {
-        this.gameObject.SetActive(false);
     }
 
     public void OnObjectReused() {

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 252805984246471436}
   - component: {fileID: 252805984246471443}
   - component: {fileID: 1239704059}
+  - component: {fileID: -3468870792625476866}
+  - component: {fileID: 6825007527899928641}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Untagged
@@ -107,7 +109,7 @@ Animator:
   m_GameObject: {fileID: 252805984246471440}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 649d37c7f294ba84facac9eb7de28f72, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -134,6 +136,33 @@ MonoBehaviour:
     disappearAnimationTime: 0.5
     placementPositionY: 0
     disappearPositionY: -0.6
+  _enemy: {fileID: 0}
   _destinationTransform: {fileID: 0}
-  _isMoving: 0
-  _hasPlayedDisappearAnimation: 0
+--- !u!114 &-3468870792625476866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252805984246471440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca451311fbf30941bebdb854c89e30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyStats: {fileID: 0}
+--- !u!114 &6825007527899928641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252805984246471440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2b99bdae5851f4db4cc6963ec4e973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDefinition_Template: {fileID: 11400000, guid: 08a8d711bbe3eac4ab36c1a12f7d8094,
+    type: 2}
+  _enemy: {fileID: 0}

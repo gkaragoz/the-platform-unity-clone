@@ -3,16 +3,6 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour {
 
-    [System.Serializable]
-    public class Settings {
-        public float rockSpawnRate = 1f;
-        public float bladeSpawnRate = 5f;
-    }
-
-    [Header("Initializations")]
-    [SerializeField]
-    private Settings _settings = null;
-
     public bool IsRunning { get { return _isRunning; } }
 
     [Header("Debug")]
@@ -28,7 +18,7 @@ public class EnemyGenerator : MonoBehaviour {
 
 
     public IEnumerator ICheckRocks() {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(_settings.rockSpawnRate);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Rock"));
 
         while (true) {
             yield return waitForSeconds;
@@ -38,7 +28,7 @@ public class EnemyGenerator : MonoBehaviour {
     }
 
     public IEnumerator ICheckBlades() {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(_settings.bladeSpawnRate);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetCrashScore("Rock"));
 
         while (true) {
             yield return waitForSeconds;
