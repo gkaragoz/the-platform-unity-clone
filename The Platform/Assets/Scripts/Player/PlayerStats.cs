@@ -30,6 +30,10 @@ public class PlayerStats : MonoBehaviour {
         }
     }
 
+    public void AddGold() {
+        _player.Gold++;
+    }
+
     #endregion
 
     #region Setters
@@ -46,6 +50,10 @@ public class PlayerStats : MonoBehaviour {
         _player.HighScore = value;
     }
 
+    public void SetGold(int value) {
+        _player.Gold = value;
+    }
+
     #endregion
 
     #region Reporters
@@ -60,6 +68,10 @@ public class PlayerStats : MonoBehaviour {
 
     public int GetHighScore() {
         return _player.HighScore;
+    }
+
+    public int GetGold() {
+        return _player.Gold;
     }
 
     #endregion

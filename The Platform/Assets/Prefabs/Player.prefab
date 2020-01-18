@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1561664513}
   m_Layer: 0
   m_Name: FootRayPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1653792496}
   m_Layer: 0
   m_Name: MeshGraphics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1789901452}
   m_Layer: 0
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 6425783361723701258}
   m_Layer: 0
   m_Name: ColliderPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,9 +197,10 @@ GameObject:
   - component: {fileID: 3659816252107798889}
   - component: {fileID: 5910443332882230115}
   - component: {fileID: 1843162475547755947}
+  - component: {fileID: 4768742770205450590}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,3 +297,19 @@ MonoBehaviour:
   _isJumping: 0
   _isCrouching: 0
   _characterController: {fileID: 0}
+  _playerStats: {fileID: 0}
+--- !u!114 &4768742770205450590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768742770145036022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d66fc83b1d4ef247a8f203acc674bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerDefinition_Template: {fileID: 11400000, guid: 8b4b4b43be8275d409b39898171d89b4,
+    type: 2}
+  _player: {fileID: 0}

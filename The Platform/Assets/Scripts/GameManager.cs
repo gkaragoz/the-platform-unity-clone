@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private EnemyGenerator _enemyGenerator = null;
     [SerializeField]
+    private CollectableGenerator _collectableGenerator = null;
+    [SerializeField]
     private PlayerController _playerController = null;
 
     [SerializeField]
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour {
             ObjectPooler.instance.InitializePool("Rock");
             ObjectPooler.instance.InitializePool("BladeForward");
             ObjectPooler.instance.InitializePool("BladeBackward");
+            ObjectPooler.instance.InitializePool("Gold");
 
             InitializeBladeDestinations();
 
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour {
 
     private void StartGame() {
         _enemyGenerator.StartGenerateAll();
+        _collectableGenerator.StartGoldSpawns();
 
         GameStateEnum = GameState.Gameplay;
     }
@@ -151,5 +155,9 @@ public class GameManager : MonoBehaviour {
 
         OnPlayerStatsChanged?.Invoke(_playerController.PlayerStats);
     }
+    public void AddGoldToPlayer() {
+        _playerController.AddGold();
+    }
+
 
 }

@@ -101,4 +101,8 @@ public class PlayerController : MonoBehaviour {
         _playerStats.AddCurrentScore(value);
     }
 
+    public void AddGold() {
+        _playerStats.AddGold();
+    }
+
 }

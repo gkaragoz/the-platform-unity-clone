@@ -17,7 +17,7 @@ public class EnemyGenerator : MonoBehaviour {
     private Coroutine _checkBladesCoroutine = null;
 
 
-    public IEnumerator ICheckRocks() {
+    private IEnumerator ICheckRocks() {
         WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Rock"));
 
         while (true) {
@@ -27,7 +27,7 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
-    public IEnumerator ICheckBlades() {
+    private IEnumerator ICheckBlades() {
         WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetCrashScore("Rock"));
 
         while (true) {
@@ -37,7 +37,7 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
-    public void SpawnRock() {
+    private void SpawnRock() {
         Vector3 randomPosition = new Vector3(
             0f, 
             GameManager.instance.RockFallPivotTransform.position.y, 
@@ -46,7 +46,7 @@ public class EnemyGenerator : MonoBehaviour {
         ObjectPooler.instance.SpawnFromPool("Rock", randomPosition, randomQuaternion);
     }
 
-    public void SpawnBlade() {
+    private void SpawnBlade() {
         float zPos = 0f;
         if (Random.Range(0, 2) == 0) {
             zPos = GameManager.instance.LeftMapPivotTransform.position.z;

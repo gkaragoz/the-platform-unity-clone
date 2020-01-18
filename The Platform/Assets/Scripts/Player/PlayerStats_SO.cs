@@ -16,6 +16,10 @@ public class PlayerStats_SO : ScriptableObject {
     [Utils.ReadOnly]
     private int _highScore = 0;
 
+    [SerializeField]
+    [Utils.ReadOnly]
+    private int _gold = 0;
+
     public string Name {
         get { return _name; }
         set { _name = value; }
@@ -27,6 +31,10 @@ public class PlayerStats_SO : ScriptableObject {
     public int HighScore {
         get { return _highScore; }
         set { _highScore = value; }
+    }
+    public int Gold {
+        get { return _gold; }
+        set { _gold = value; }
     }
 
     #endregion
