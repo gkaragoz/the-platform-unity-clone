@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CharacterManager))]
+[RequireComponent(typeof(CharacterManager), typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour {
 
     public Vector2 CurrentInput { get; set; }
@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour {
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
-    private bool _isControllable = false;
-    [SerializeField]
-    [Utils.ReadOnly]
     private float _xInput;
     [SerializeField]
     [Utils.ReadOnly]
@@ -30,11 +27,15 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     [Utils.ReadOnly]
     private CharacterManager _characterController;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private PlayerStats _playerStats;
 
     private GameManager _gameManager = null;
 
     private void Start() {
         _characterController = GetComponent<CharacterManager>();
+        _playerStats = GetComponent<PlayerStats>();
 
         _gameManager = GameManager.instance;
     }
@@ -93,6 +94,10 @@ public class PlayerController : MonoBehaviour {
 
     public void MoveToCurrentInput() {
         _characterController.MoveToInput(CurrentInput);
+    }
+
+    public void AddScore(int value) {
+        _playerStats.AddCurrentScore(value);
     }
 
 }
