@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour {
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
+    private bool _isControllable = false;
+    [SerializeField]
+    [Utils.ReadOnly]
     private float _xInput;
     [SerializeField]
     [Utils.ReadOnly]
@@ -28,11 +31,19 @@ public class PlayerController : MonoBehaviour {
     [Utils.ReadOnly]
     private CharacterManager _characterController;
 
-    private void Awake() {
+    private GameManager _gameManager = null;
+
+    private void Start() {
         _characterController = GetComponent<CharacterManager>();
+
+        _gameManager = GameManager.instance;
     }
 
     private void Update() {
+        if (_gameManager.GameStateEnum != GameManager.GameState.Gameplay) {
+            return;
+        }
+
         _isJumping = IsJumping();
 
         _xInput = Input.GetAxis("Horizontal");
