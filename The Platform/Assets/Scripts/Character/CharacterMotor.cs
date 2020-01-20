@@ -14,8 +14,6 @@ public class CharacterMotor : MonoBehaviour {
     [SerializeField]
     private Transform _colliderPivotTransform = null;
     [SerializeField]
-    private Transform _footRayPivotTransform = null;
-    [SerializeField]
     private float _crouchDownSpeedMultiplier = 1f;
 
     public bool IsMoving { get { return _rb.velocity.magnitude > 0.01f ? true : false; } }
