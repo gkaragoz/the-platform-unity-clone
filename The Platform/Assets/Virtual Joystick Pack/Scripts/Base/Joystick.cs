@@ -13,8 +13,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public RectTransform background;
     public RectTransform handle;
 
-    public float Horizontal { get { return inputVector.x; } }
-    public float Vertical { get { return inputVector.y; } }
+    public float Horizontal { get { return inputVector.normalized.x; } }
+    public float Vertical { get { return inputVector.normalized.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
     public virtual void OnDrag(PointerEventData eventData)
