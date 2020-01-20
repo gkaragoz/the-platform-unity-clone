@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterStats), typeof(Rigidbody))]
@@ -48,13 +49,9 @@ public class CharacterMotor : MonoBehaviour {
         _meshGraphicsTransform.localPosition = new Vector3(_meshGraphicsTransform.localPosition.x, 1.5f, _meshGraphicsTransform.localPosition.z);
         _colliderPivotTransform.localScale = new Vector3(_meshGraphicsTransform.localScale.x, 1.0f, _meshGraphicsTransform.localScale.z);
     }
+
     public bool GetIsJumping() {
-        RaycastHit hit;
-        if (Physics.Raycast(_footRayPivotTransform.position, Vector3.down, out hit, Mathf.Infinity)) {
-            float distance = Vector3.Distance(_footRayPivotTransform.position, hit.point);
-            return distance <= 0.001f ? false : true;
-        }
-        return true;
+        return _rb.velocity.y == 0 ? false : true;
     }
 
     private IEnumerator ISetCrouchDownVelocity() {

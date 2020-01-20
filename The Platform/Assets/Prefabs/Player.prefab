@@ -293,7 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b51beafd2aba3b47aacb029d0c497cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _joystick: {fileID: 0}
   _xInput: 0
+  _yInput: 0
   _isJumping: 0
   _isCrouching: 0
   _characterController: {fileID: 0}

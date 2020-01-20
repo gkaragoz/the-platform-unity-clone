@@ -15,10 +15,17 @@ public class PlayerController : MonoBehaviour {
     public CharacterManager CharacterController { get { return _characterController; } }
     public PlayerStats PlayerStats { get { return _playerStats; } }
 
+    [Header("Joystick")]
+    [SerializeField]
+    private FloatingJoystick _joystick = null;
+
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
     private float _xInput;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private float _yInput;
     [SerializeField]
     [Utils.ReadOnly]
     private bool _isJumping;
@@ -41,30 +48,31 @@ public class PlayerController : MonoBehaviour {
         _gameManager = GameManager.instance;
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         if (_gameManager.GameStateEnum != GameManager.GameState.Gameplay) {
             return;
         }
 
         _isJumping = IsJumping();
 
-        _xInput = Input.GetAxis("Horizontal");
+        _xInput = _joystick.Horizontal;
+        _yInput = _joystick.Vertical;
 
         CurrentInput = new Vector2(_xInput, 0f);
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
+        if (_yInput <= -0.8f) {
             if (!IsCrouching) {
                 Crouch();
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) {
+        if (_yInput > -0.8f) {
             if (IsCrouching) {
                 StandUp();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
+        if (_yInput > 0.8f) {
             if (!IsJumping()) {
                 Jump();
             }
