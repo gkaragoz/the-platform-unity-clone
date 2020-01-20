@@ -16,3 +16,4 @@ MonoBehaviour:
   _spawnRate: 1
   _crashScore: 5
   _hideTime: 2
+  _movementSpeed: 8

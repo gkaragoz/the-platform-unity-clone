@@ -12,8 +12,6 @@ public class Rock : MonoBehaviour, IPooledObject {
     private ParticleSystem _crashFX = null;
     [SerializeField]
     private Rigidbody _rb = null;
-    [SerializeField]
-    private float _fallingSpeed = 1f;
 
     [Header("Debug")]
     [SerializeField]
@@ -70,7 +68,7 @@ public class Rock : MonoBehaviour, IPooledObject {
     }
 
     public void Fall() {
-        _rb.velocity = Vector3.down * _fallingSpeed;
+        _rb.velocity = Vector3.down * _enemy.EnemyStats.GetMovementSpeed();
     }
 
     public void OnObjectReused() {

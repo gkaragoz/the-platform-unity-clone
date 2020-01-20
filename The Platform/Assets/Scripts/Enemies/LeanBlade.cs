@@ -13,8 +13,6 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
 
     [Header("Initializations")]
     [SerializeField]
-    private float _time = 2f;
-    [SerializeField]
     private Settings _settings = null;
 
     [Header("Debug")]
@@ -38,7 +36,7 @@ public class LeanBlade : MonoBehaviour, IPooledObject {
     }
 
     private void MoveToDestination() {
-        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _time).setEase(LeanTweenType.easeInOutQuad).setOnComplete(PlayDisappearAnimation);
+        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _enemy.EnemyStats.GetMovementSpeed()).setEase(LeanTweenType.easeInOutQuad).setOnComplete(PlayDisappearAnimation);
     }
 
     public void SetDestinationTransform(Transform destination) {

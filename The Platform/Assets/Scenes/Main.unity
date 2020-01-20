@@ -1437,13 +1437,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.2145302, y: 0.5991122, z: -0.17086731, w: -0.7522271}
-  m_LocalPosition: {x: 21.127861, y: 14.432929, z: -4.9839964}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 35, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 30, y: -60, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &977102609
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,6 +3039,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1096889338}
     m_Modifications:
+    - target: {fileID: 2499868439972482463, guid: e07112806eaa8714893ba44f74943c48,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform
+      objectReference: {fileID: 0}
     - target: {fileID: 2499868439972482462, guid: e07112806eaa8714893ba44f74943c48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3094,11 +3099,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2499868439972482463, guid: e07112806eaa8714893ba44f74943c48,
-        type: 3}
-      propertyPath: m_Name
-      value: Platform
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e07112806eaa8714893ba44f74943c48, type: 3}
 --- !u!1001 &4768742770205450588
@@ -3108,6 +3108,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4768742770145036022, guid: 0ed19291260c7544b8a3e236a474e716,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4768742770145036018, guid: 0ed19291260c7544b8a3e236a474e716,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3162,11 +3167,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4768742770145036022, guid: 0ed19291260c7544b8a3e236a474e716,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed19291260c7544b8a3e236a474e716, type: 3}

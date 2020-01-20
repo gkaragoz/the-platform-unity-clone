@@ -38,6 +38,10 @@ public class EnemyStats : MonoBehaviour {
         return _enemy.HideTime;
     }
 
+    public float GetMovementSpeed() {
+        return _enemy.MovementSpeed;
+    }
+
     #endregion
 
 }

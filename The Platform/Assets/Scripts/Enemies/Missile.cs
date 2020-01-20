@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour, IPooledObject {
 
-    [Header("Initializations")]
-    [SerializeField]
-    private float _time = 4f;
-
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
@@ -21,7 +17,7 @@ public class Missile : MonoBehaviour, IPooledObject {
     }
 
     private void MoveToDestination() {
-        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _time).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _enemy.EnemyStats.GetMovementSpeed()).setEase(LeanTweenType.easeInOutQuad);
     }
 
     public void SetDestinationTransform(Transform destination) {

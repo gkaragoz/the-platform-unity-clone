@@ -17,6 +17,9 @@ public class EnemyStats_SO : ScriptableObject {
     [SerializeField]
     private float _hideTime = 0f;
 
+    [SerializeField]
+    private float _movementSpeed = 1f;
+
     public string Name {
         get { return _name; }
         set { _name = value; }
@@ -32,6 +35,10 @@ public class EnemyStats_SO : ScriptableObject {
     public float HideTime { 
         get { return _hideTime; }
         set { _hideTime = value; }
+    }
+    public float MovementSpeed {
+        get { return _movementSpeed; }
+        set { _movementSpeed = value; }
     }
 
     #endregion
