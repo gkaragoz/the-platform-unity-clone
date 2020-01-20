@@ -58,21 +58,21 @@ public class PlayerController : MonoBehaviour {
         _xInput = _joystick.Horizontal;
         _yInput = _joystick.Vertical;
 
-        CurrentInput = new Vector2(_xInput, 0f);
+        CurrentInput = new Vector2(_xInput, _yInput);
 
-        if (_yInput <= -0.8f) {
+        if (_yInput <= -0.7f) {
             if (!IsCrouching) {
                 Crouch();
             }
         }
 
-        if (_yInput > -0.8f) {
+        if (_yInput > -0.7f) {
             if (IsCrouching) {
                 StandUp();
             }
         }
 
-        if (_yInput > 0.8f) {
+        if (_yInput > 0.7f) {
             if (!IsJumping()) {
                 Jump();
             }
