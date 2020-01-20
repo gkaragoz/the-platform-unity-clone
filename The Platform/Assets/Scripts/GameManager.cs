@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Transform _rightMapPivotTransform = null;
     [SerializeField]
+    private Transform _leftMissilePivotTransform = null;
+    [SerializeField]
+    private Transform _rightMissilePivotTransform = null;
+    [SerializeField]
     private Transform _rockFallPivotTransform = null;
 
     [Header("Debug")]
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour {
     }
     public Transform LeftMapPivotTransform { get { return _leftMapPivotTransform; } }
     public Transform RightMapPivotTransform { get { return _rightMapPivotTransform; } }
+    public Transform LeftMissilePivotTransform { get { return _leftMissilePivotTransform; } }
+    public Transform RightMissilePivotTransform { get { return _rightMissilePivotTransform; } }
     public Transform RockFallPivotTransform { get { return _rockFallPivotTransform; } }
 
     private void InitializeNewGame() {
@@ -77,11 +83,14 @@ public class GameManager : MonoBehaviour {
 
         if (!_hasGameObjectsInitialized) {
             ObjectPooler.instance.InitializePool("Rock");
+            ObjectPooler.instance.InitializePool("MissileForward");
+            ObjectPooler.instance.InitializePool("MissileBackward");
             ObjectPooler.instance.InitializePool("BladeForward");
             ObjectPooler.instance.InitializePool("BladeBackward");
             ObjectPooler.instance.InitializePool("Gold");
 
             InitializeBladeDestinations();
+            InitializeMissileDestinations();
 
             _hasGameObjectsInitialized = true;
         }
@@ -92,6 +101,15 @@ public class GameManager : MonoBehaviour {
         }
         foreach (GameObject bladeObject in ObjectPooler.instance.GetGameObjectsOnPool("BladeBackward")) {
             bladeObject.GetComponent<LeanBlade>().SetDestinationTransform(_leftMapPivotTransform);
+        }
+    }
+
+    private void InitializeMissileDestinations() {
+        foreach (GameObject missileObject in ObjectPooler.instance.GetGameObjectsOnPool("MissileForward")) {
+            missileObject.GetComponent<Missile>().SetDestinationTransform(_rightMissilePivotTransform);
+        }
+        foreach (GameObject missileObject in ObjectPooler.instance.GetGameObjectsOnPool("MissileBackward")) {
+            missileObject.GetComponent<Missile>().SetDestinationTransform(_leftMissilePivotTransform);
         }
     }
 

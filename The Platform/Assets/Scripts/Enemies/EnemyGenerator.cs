@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour {
@@ -15,6 +16,9 @@ public class EnemyGenerator : MonoBehaviour {
     [SerializeField]
     [Utils.ReadOnly]
     private Coroutine _checkBladesCoroutine = null;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Coroutine _checkMissilesCoroutine = null;
 
 
     private IEnumerator ICheckRocks() {
@@ -24,6 +28,16 @@ public class EnemyGenerator : MonoBehaviour {
             yield return waitForSeconds;
 
             SpawnRock();
+        }
+    }
+
+    private IEnumerator ICheckMissiles() {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Missile"));
+
+        while (true) {
+            yield return waitForSeconds;
+
+            SpawnMissile();
         }
     }
 
@@ -39,16 +53,16 @@ public class EnemyGenerator : MonoBehaviour {
 
     private void SpawnRock() {
         Vector3 randomPosition = new Vector3(
-            0f, 
-            GameManager.instance.RockFallPivotTransform.position.y, 
-            Random.Range(GameManager.instance.LeftMapPivotTransform.position.z, GameManager.instance.RightMapPivotTransform.position.z));
-        Quaternion randomQuaternion = Quaternion.Euler(0f, Random.Range(0, 180), 0f);
+            0f,
+            GameManager.instance.RockFallPivotTransform.position.y,
+            UnityEngine.Random.Range(GameManager.instance.LeftMapPivotTransform.position.z, GameManager.instance.RightMapPivotTransform.position.z));
+        Quaternion randomQuaternion = Quaternion.Euler(0f, UnityEngine.Random.Range(0, 180), 0f);
         ObjectPooler.instance.SpawnFromPool("Rock", randomPosition, randomQuaternion);
     }
 
     private void SpawnBlade() {
         float zPos = 0f;
-        if (Random.Range(0, 2) == 0) {
+        if (UnityEngine.Random.Range(0, 2) == 0) {
             zPos = GameManager.instance.LeftMapPivotTransform.position.z;
 
             Vector3 spawnPosition = new Vector3(
@@ -69,11 +83,39 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
+    private void SpawnMissile() {
+        float zPos = 0f;
+        float yPos = 0f;
+        float xPos = 0f;
+        yPos = GameManager.instance.LeftMissilePivotTransform.position.y;
+        xPos = GameManager.instance.LeftMissilePivotTransform.position.x;
+        if (UnityEngine.Random.Range(0, 2) == 0) {
+            zPos = GameManager.instance.LeftMissilePivotTransform.position.z;
+
+            Vector3 spawnPosition = new Vector3(
+                xPos,
+                yPos,
+                zPos);
+
+            ObjectPooler.instance.SpawnFromPool("MissileForward", spawnPosition, Quaternion.identity);
+        } else {
+            zPos = GameManager.instance.RightMissilePivotTransform.position.z;
+
+            Vector3 spawnPosition = new Vector3(
+                xPos,
+                yPos,
+                zPos);
+
+            ObjectPooler.instance.SpawnFromPool("MissileBackward", spawnPosition, Quaternion.identity);
+        }
+    }
+
     public void StartGenerateAll() {
         _isRunning = true;
 
         StartRockSpawns();
         StartBladeSpawns();
+        StartMissileSpawns();
     }
 
     public void StopGenerateAll() {
@@ -91,6 +133,18 @@ public class EnemyGenerator : MonoBehaviour {
 
     public void StopRockSpawns() {
         StopCoroutine(_checkRocksCoroutine);
+        _isRunning = CheckAllCoroutineRunStatus();
+    }
+
+    public void StartMissileSpawns() {
+        if (_checkMissilesCoroutine == null) {
+            _checkMissilesCoroutine = StartCoroutine(ICheckMissiles());
+            _isRunning = true;
+        }
+    }
+
+    public void StopMissileSpawns() {
+        StopCoroutine(_checkMissilesCoroutine);
         _isRunning = CheckAllCoroutineRunStatus();
     }
 
