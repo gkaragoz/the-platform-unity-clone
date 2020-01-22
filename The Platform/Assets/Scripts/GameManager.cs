@@ -47,6 +47,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Transform _rightMissilePivotTransform = null;
     [SerializeField]
+    private Transform _leftCannonballPivotTransform = null;
+    [SerializeField]
+    private Transform _rightCannonballPivotTransform = null;
+    [SerializeField]
     private Transform _rockFallPivotTransform = null;
 
     [Header("Debug")]
@@ -74,6 +78,8 @@ public class GameManager : MonoBehaviour {
     public Transform RightMapPivotTransform { get { return _rightMapPivotTransform; } }
     public Transform LeftMissilePivotTransform { get { return _leftMissilePivotTransform; } }
     public Transform RightMissilePivotTransform { get { return _rightMissilePivotTransform; } }
+    public Transform LeftCannonballPivotTransform { get { return _leftCannonballPivotTransform; } }
+    public Transform RightCannonballPivotTransform { get { return _rightCannonballPivotTransform; } }
     public Transform RockFallPivotTransform { get { return _rockFallPivotTransform; } }
 
     private void InitializeNewGame() {
@@ -87,10 +93,13 @@ public class GameManager : MonoBehaviour {
             ObjectPooler.instance.InitializePool("MissileBackward");
             ObjectPooler.instance.InitializePool("BladeForward");
             ObjectPooler.instance.InitializePool("BladeBackward");
+            ObjectPooler.instance.InitializePool("CannonballForward");
+            ObjectPooler.instance.InitializePool("CannonballBackward");
             ObjectPooler.instance.InitializePool("Gold");
 
             InitializeBladeDestinations();
             InitializeMissileDestinations();
+            InitializeCannonballDestinations();
 
             _hasGameObjectsInitialized = true;
         }
@@ -110,6 +119,15 @@ public class GameManager : MonoBehaviour {
         }
         foreach (GameObject missileObject in ObjectPooler.instance.GetGameObjectsOnPool("MissileBackward")) {
             missileObject.GetComponent<Missile>().SetDestinationTransform(_leftMissilePivotTransform);
+        }
+    }
+
+    private void InitializeCannonballDestinations() {
+        foreach (GameObject cannonballObject in ObjectPooler.instance.GetGameObjectsOnPool("CannonballForward")) {
+            cannonballObject.GetComponent<Cannonball>().SetDirection(Cannonball.Direction.RIGHT);
+        }
+        foreach (GameObject cannonballObject in ObjectPooler.instance.GetGameObjectsOnPool("CannonballBackward")) {
+            cannonballObject.GetComponent<Cannonball>().SetDirection(Cannonball.Direction.LEFT);
         }
     }
 

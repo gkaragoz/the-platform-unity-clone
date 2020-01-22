@@ -1440,7 +1440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 35, y: 6.5, z: 0}
+  m_LocalPosition: {x: 29, y: 6.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 14,31 FPS
+  m_text: 3,09 FPS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 980457629}
-    characterCount: 9
+    characterCount: 8
     spriteCount: 0
     spaceCount: 1
     wordCount: 3
@@ -1863,6 +1863,8 @@ Transform:
   - {fileID: 1153809647}
   - {fileID: 2021472730}
   - {fileID: 776126891}
+  - {fileID: 1156327809}
+  - {fileID: 1141507130}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1885,10 +1887,42 @@ MonoBehaviour:
   _rightMapPivotTransform: {fileID: 110703764}
   _leftMissilePivotTransform: {fileID: 2021472730}
   _rightMissilePivotTransform: {fileID: 776126891}
+  _leftCannonballPivotTransform: {fileID: 1156327809}
+  _rightCannonballPivotTransform: {fileID: 1141507130}
   _rockFallPivotTransform: {fileID: 1153809647}
   _gameState: 0
   _hasGameObjectsInitialized: 0
   _isGamePaused: 0
+--- !u!1 &1141507129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141507130}
+  m_Layer: 0
+  m_Name: _RightCannonballSpawnPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141507130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141507129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 20, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1124734586}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153809646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1952,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1124734586}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1156327808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156327809}
+  m_Layer: 0
+  m_Name: _LeftCannonballSpawnPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1156327809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156327808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 20, z: -15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1124734586}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1158268066
 GameObject:
@@ -1989,6 +2053,16 @@ MonoBehaviour:
   - parentTransform: {fileID: 1158268067}
     name: MissileBackward
     prefab: {fileID: 1033669999527042143, guid: bc40d8118da78904097aea67f882accb,
+      type: 3}
+    size: 10
+  - parentTransform: {fileID: 1158268067}
+    name: CannonballBackward
+    prefab: {fileID: 3724864061978150084, guid: 5eedfc8b690962547a8fce37cb41b6b0,
+      type: 3}
+    size: 10
+  - parentTransform: {fileID: 1158268067}
+    name: CannonballForward
+    prefab: {fileID: 3724864061978150084, guid: 5eedfc8b690962547a8fce37cb41b6b0,
       type: 3}
     size: 10
 --- !u!1 &1162350048
@@ -2268,6 +2342,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08a8d711bbe3eac4ab36c1a12f7d8094, type: 2}
   - {fileID: 11400000, guid: 33d46b2d7019efc44a49471fae1e706f, type: 2}
   - {fileID: 11400000, guid: 46c2243e707862f4cb16abb2e66aeefa, type: 2}
+  - {fileID: 11400000, guid: bb56318d1b331e04ca4180e63fd211ec, type: 2}
 --- !u!4 &1192936475
 Transform:
   m_ObjectHideFlags: 0
@@ -2690,6 +2765,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58004e398739696429f70015c6f3f1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stopRocks: 1
+  _stopBlades: 1
+  _stopMissiles: 1
+  _stopCannonballs: 0
   _isRunning: 1
 --- !u!1 &1599471668
 GameObject:

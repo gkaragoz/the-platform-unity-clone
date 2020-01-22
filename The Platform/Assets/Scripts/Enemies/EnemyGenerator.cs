@@ -6,6 +6,16 @@ public class EnemyGenerator : MonoBehaviour {
 
     public bool IsRunning { get { return _isRunning; } }
 
+    [Header("Settings")]
+    [SerializeField]
+    private bool _stopRocks = false;
+    [SerializeField]
+    private bool _stopBlades = false;
+    [SerializeField]
+    private bool _stopMissiles = false;
+    [SerializeField]
+    private bool _stopCannonballs = false;
+
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
@@ -19,7 +29,24 @@ public class EnemyGenerator : MonoBehaviour {
     [SerializeField]
     [Utils.ReadOnly]
     private Coroutine _checkMissilesCoroutine = null;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Coroutine _checkCannonballsCoroutine = null;
 
+    private void Update() {
+        if (_stopRocks) {
+            StopRockSpawns();
+        }
+        if (_stopBlades) {
+            StopBladeSpawns();
+        }
+        if (_stopMissiles) {
+            StopMissileSpawns();
+        }
+        if (_stopCannonballs) {
+            StopCannonballSpawns();
+        }
+    }
 
     private IEnumerator ICheckRocks() {
         WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Rock"));
@@ -42,12 +69,21 @@ public class EnemyGenerator : MonoBehaviour {
     }
 
     private IEnumerator ICheckBlades() {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetCrashScore("Rock"));
+        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Rock"));
 
         while (true) {
             yield return waitForSeconds;
 
             SpawnBlade();
+        }
+    }
+    private IEnumerator ICheckCannonballs() {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(EnemyDB.instance.GetSpawnRate("Cannonball"));
+
+        while (true) {
+            yield return waitForSeconds;
+
+            SpawnCannonball();
         }
     }
 
@@ -84,11 +120,11 @@ public class EnemyGenerator : MonoBehaviour {
     }
 
     private void SpawnMissile() {
-        float zPos = 0f;
-        float yPos = 0f;
         float xPos = 0f;
-        yPos = GameManager.instance.LeftMissilePivotTransform.position.y;
-        xPos = GameManager.instance.LeftMissilePivotTransform.position.x;
+        float yPos = 0f;
+        float zPos = 0f;
+        yPos = 0f;
+        xPos = 0f;
         if (UnityEngine.Random.Range(0, 2) == 0) {
             zPos = GameManager.instance.LeftMissilePivotTransform.position.z;
 
@@ -110,12 +146,43 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
+    private void SpawnCannonball() {
+        float xPos = 0f;
+        float yPos = 0f;
+        float zPos = 0f;
+
+        yPos = 0;
+        xPos = 0;
+        if (UnityEngine.Random.Range(0, 2) == 0) {
+            yPos = GameManager.instance.LeftCannonballPivotTransform.position.y;
+            zPos = GameManager.instance.LeftCannonballPivotTransform.position.z;
+
+            Vector3 spawnPosition = new Vector3(
+                xPos,
+                yPos,
+                zPos);
+
+            ObjectPooler.instance.SpawnFromPool("CannonballForward", spawnPosition, Quaternion.identity);
+        } else {
+            yPos = GameManager.instance.RightCannonballPivotTransform.position.y;
+            zPos = GameManager.instance.RightCannonballPivotTransform.position.z;
+
+            Vector3 spawnPosition = new Vector3(
+                xPos,
+                yPos,
+                zPos);
+
+            ObjectPooler.instance.SpawnFromPool("CannonballBackward", spawnPosition, Quaternion.identity);
+        }
+    }
+
     public void StartGenerateAll() {
         _isRunning = true;
 
         StartRockSpawns();
         StartBladeSpawns();
         StartMissileSpawns();
+        StartCannonballSpawns();
     }
 
     public void StopGenerateAll() {
@@ -132,7 +199,10 @@ public class EnemyGenerator : MonoBehaviour {
     }
 
     public void StopRockSpawns() {
-        StopCoroutine(_checkRocksCoroutine);
+        if (_checkMissilesCoroutine != null) {
+            StopCoroutine(_checkRocksCoroutine);
+        }
+
         _isRunning = CheckAllCoroutineRunStatus();
     }
 
@@ -144,7 +214,10 @@ public class EnemyGenerator : MonoBehaviour {
     }
 
     public void StopMissileSpawns() {
-        StopCoroutine(_checkMissilesCoroutine);
+        if (_checkMissilesCoroutine != null) {
+            StopCoroutine(_checkMissilesCoroutine);
+        }
+
         _isRunning = CheckAllCoroutineRunStatus();
     }
 
@@ -155,13 +228,31 @@ public class EnemyGenerator : MonoBehaviour {
         }
     }
 
-    public void StopBladeSpawn() {
-        StopCoroutine(_checkBladesCoroutine);
+    public void StopBladeSpawns() {
+        if (_checkMissilesCoroutine != null) {
+            StopCoroutine(_checkBladesCoroutine);
+        }
+
+        _isRunning = CheckAllCoroutineRunStatus();
+    }
+
+    public void StartCannonballSpawns() {
+        if (_checkCannonballsCoroutine == null) {
+            _checkCannonballsCoroutine = StartCoroutine(ICheckCannonballs());
+            _isRunning = true;
+        }
+    }
+
+    public void StopCannonballSpawns() {
+        if (_checkMissilesCoroutine != null) {
+            StopCoroutine(_checkCannonballsCoroutine);
+        }
+
         _isRunning = CheckAllCoroutineRunStatus();
     }
 
     private bool CheckAllCoroutineRunStatus() {
-        if (_checkRocksCoroutine == null && _checkBladesCoroutine == null) {
+        if (_checkRocksCoroutine == null && _checkBladesCoroutine == null && _checkMissilesCoroutine == null && _checkCannonballsCoroutine == null) {
             return false;
         } else {
             return true;

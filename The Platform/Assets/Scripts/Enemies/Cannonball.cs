@@ -1,22 +1,32 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
-public class Rock : MonoBehaviour, IPooledObject {
+[RequireComponent(typeof(Rigidbody))]
+public class Cannonball : MonoBehaviour, IPooledObject {
+
+    public enum Direction {
+        RIGHT,
+        LEFT
+    }
 
     [Header("Initializations")]
+    [SerializeField]
+    private Rigidbody _rb = null;
+    [SerializeField]
+    private float _fireAngle = 45f;
     [SerializeField]
     private Renderer _renderer = null;
     [SerializeField]
     private TrailRenderer _trailRenderer = null;
     [SerializeField]
     private ParticleSystem _crashFX = null;
-    [SerializeField]
-    private Rigidbody _rb = null;
 
     [Header("Debug")]
     [SerializeField]
     [Utils.ReadOnly]
     private Enemy _enemy = null;
+    [SerializeField]
+    [Utils.ReadOnly]
+    private Direction _direction = Direction.LEFT;
     [SerializeField]
     [Utils.ReadOnly]
     private Color _generatedRandomColor;
@@ -33,7 +43,6 @@ public class Rock : MonoBehaviour, IPooledObject {
 
     private void Update() {
         if (_rb.position.y < 0 && !_enemy.HasCrashed) {
-            _rb.position = new Vector3(_rb.position.x, transform.localScale.y * 0.5f, _rb.position.z);
             _rb.velocity = Vector3.zero;
             _rb.isKinematic = true;
 
@@ -67,8 +76,17 @@ public class Rock : MonoBehaviour, IPooledObject {
         main.startColor = _generatedRandomColor;
     }
 
-    public void Fall() {
-        _rb.velocity = Vector3.down * _enemy.EnemyStats.GetMovementSpeed();
+    private Vector3 GetRandomTargetPosition() {
+        return new Vector3(0f, 0f, Random.Range(GameManager.instance.LeftMapPivotTransform.position.z, GameManager.instance.RightMapPivotTransform.position.z));
+    }
+
+    private void Fire() {
+        Vector3 fireVector = HelperArcProjectile.MagicShoot(_fireAngle, GetRandomTargetPosition(), this.transform.position);
+        _rb.AddForce(fireVector, ForceMode.VelocityChange);
+    }
+
+    public void SetDirection(Direction direction) {
+        this._direction = direction;
     }
 
     public void OnObjectReused() {
@@ -81,7 +99,7 @@ public class Rock : MonoBehaviour, IPooledObject {
 
         this.gameObject.SetActive(true);
 
-        Fall();
+        Fire();
     }
 
 }

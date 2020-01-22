@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Missile : MonoBehaviour, IPooledObject {
 
@@ -17,7 +15,13 @@ public class Missile : MonoBehaviour, IPooledObject {
     }
 
     private void MoveToDestination() {
-        LeanTween.move(this.gameObject, new Vector3(transform.position.x, transform.position.y, _destinationTransform.position.z), _enemy.EnemyStats.GetMovementSpeed()).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.move( this.gameObject, 
+                        new Vector3(transform.position.x, 
+                                    transform.position.y, 
+                                    _destinationTransform.position.z),
+                        _enemy.EnemyStats.GetMovementSpeed())
+            .setEase(LeanTweenType.easeInOutQuad)
+            .setOnComplete(_enemy.OnCrashed);
     }
 
     public void SetDestinationTransform(Transform destination) {
