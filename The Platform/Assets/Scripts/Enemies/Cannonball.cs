@@ -42,9 +42,11 @@ public class Cannonball : MonoBehaviour, IPooledObject {
     }
 
     private void Update() {
-        if (_rb.position.y < 0 && !_enemy.HasCrashed) {
+        if (_rb.position.y < 0) {
+            _rb.transform.position = new Vector3(_rb.transform.position.x, 0f, _rb.transform.position.z);
             _rb.velocity = Vector3.zero;
             _rb.isKinematic = true;
+            _rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
 
             _renderer.enabled = false;
             _crashFX.Play();
@@ -96,6 +98,7 @@ public class Cannonball : MonoBehaviour, IPooledObject {
 
         _renderer.enabled = true;
         _rb.isKinematic = false;
+        _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
         this.gameObject.SetActive(true);
 

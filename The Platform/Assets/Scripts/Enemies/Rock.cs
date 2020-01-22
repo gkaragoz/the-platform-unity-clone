@@ -32,7 +32,7 @@ public class Rock : MonoBehaviour, IPooledObject {
     }
 
     private void Update() {
-        if (_rb.position.y < 0 && !_enemy.HasCrashed) {
+        if (_rb.position.y < 0) {
             _rb.position = new Vector3(_rb.position.x, transform.localScale.y * 0.5f, _rb.position.z);
             _rb.velocity = Vector3.zero;
             _rb.isKinematic = true;
